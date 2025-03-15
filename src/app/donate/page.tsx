@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { sendGAEvent } from '@next/third-parties/google';
 
 export default function Donate() {
     const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
@@ -56,6 +57,14 @@ export default function Donate() {
             isAnonymous,
             paymentMethod,
             donorInfo: isAnonymous ? 'Anonymous' : donorInfo
+        });
+
+        // Track the donation event in Google Analytics
+        sendGAEvent('event', 'donation_completed', {
+            amount: donationAmount,
+            currency: 'USD',
+            recurring: isMonthly ? 'monthly' : 'one-time',
+            payment_method: paymentMethod
         });
 
         setIsSubmitted(true);
