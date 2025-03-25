@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "About Us",
+};
+
 export default function AboutUs() {
     return (
         <div className="flex flex-col gap-8">

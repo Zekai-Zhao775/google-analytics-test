@@ -17,7 +17,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nonprofit Organization",
+  title: {
+    template: '%s | Nonprofit Organization',
+    default: 'Nonprofit Organization'
+  },
   description: "Helping our community through various initiatives",
 };
 
