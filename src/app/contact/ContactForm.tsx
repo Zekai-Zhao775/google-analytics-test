@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { sendGAEvent } from '@next/third-parties/google';
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({
@@ -23,6 +24,13 @@ export default function ContactForm() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log('Form submitted:', formData);
+
+        // Track the contact form submission event in Google Analytics
+        sendGAEvent('event', 'contact_form_submitted', {
+            subject_category: formData.subject || 'Not specified',
+            has_message: formData.message.length > 0 ? 'yes' : 'no'
+        });
+
         // In a real application, you would send this data to your server
         setIsSubmitted(true);
         setFormData({
