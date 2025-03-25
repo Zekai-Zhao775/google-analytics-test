@@ -61,8 +61,8 @@ export default function Donate() {
 
         // Track the donation event in Google Analytics
         sendGAEvent('event', 'donation_completed', {
-            amount: donationAmount,
             currency: 'USD',
+            value: donationAmount,  // standard GA4 parameter for monetary value
             recurring: isMonthly ? 'monthly' : 'one-time',
             payment_method: paymentMethod
         });
